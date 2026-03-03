@@ -8,12 +8,10 @@ import { useRouter } from "next/navigation";
 
 const { Text } = Typography;
 
-function VerifyOtpProfessional({ email }: { email: string }) {
+function VerifyOTP({ email }: { email: string }) {
   const [step, setStep] = useState<"otp" | "changePassword">("otp");
   const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -60,33 +58,9 @@ function VerifyOtpProfessional({ email }: { email: string }) {
         method: "POST",
         body: JSON.stringify({ otp:code }),
       });
-      setStep("changePassword");
-    } catch (err: any) {
-      message.error(err.message || "OTP verification failed!");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Reset Password
-  const resetPassword = async () => {
-    if (!newPassword || !confirmPassword) return message.error("Please fill all fields");
-    if (newPassword !== confirmPassword) return message.error("Passwords do not match");
-
-    setLoading(true);
-    try {
-      await apiFetch("/auth/reset-password", {
-        method: "POST",
-        body: JSON.stringify({
-          otp: otp.join(""),
-          newPassword,
-          confirmPassword,
-        }),
-      });
-      message.success("Password changed successfully!");
       router.push("/login");
     } catch (err: any) {
-      message.error(err.message || "Failed to reset password");
+      message.error(err.message || "OTP verification failed!");
     } finally {
       setLoading(false);
     }
@@ -168,39 +142,6 @@ function VerifyOtpProfessional({ email }: { email: string }) {
               </>
             )}
 
-            {step === "changePassword" && (
-              <Form layout="vertical">
-                <Form.Item label="New Password" required>
-                  <Input.Password
-                    placeholder="Enter new password"
-                    size="large"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="rounded-md mb-4"
-                  />
-                </Form.Item>
-                <Form.Item label="Confirm Password" required>
-                  <Input.Password
-                    placeholder="Confirm new password"
-                    size="large"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="rounded-md mb-4"
-                  />
-                </Form.Item>
-                <Button
-                  type="primary"
-                  block
-                  size="large"
-                  loading={loading}
-                  onClick={resetPassword}
-                  className="h-12 text-base font-medium rounded-md"
-                >
-                  Reset Password
-                </Button>
-              </Form>
-            )}
-
             <div className="text-center mt-4">
               <Link href="/login" className="text-sm text-yellow-400 font-medium hover:underline">
                 Back to Login
@@ -213,4 +154,4 @@ function VerifyOtpProfessional({ email }: { email: string }) {
   );
 }
 
-export default VerifyOtpProfessional;
+export default VerifyOTP;

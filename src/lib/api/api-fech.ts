@@ -1,15 +1,11 @@
 import { authKey } from "@/constants/storageKey";
 import { getCokkiesToken } from "../getToken";
-import { redirect } from "next/navigation";
-import { removeAccessTokenToCookie } from "@/services/removeTokeknFromCookie";
 
 export async function apiFetch<T>(
     endpoint: string,
     options: RequestInit = {},
     caller?: 'server' | 'client'
 ): Promise<T> {
-
-    // const accessToken =  await getCokkiesToken();
 
     const isFormData = options.body instanceof FormData;
     let accessToken = '';
@@ -35,7 +31,7 @@ export async function apiFetch<T>(
     if (res.status === 401) {
         if (typeof window !== "undefined") {
             // Client side
-            window.location.href = "/partner-login";
+            window.location.href = "/login";
             return Promise.reject(); // stop execution
 
         }
@@ -66,18 +62,3 @@ export const getImage = (path: string) => {
 
     return `${baseUrl}${path}`;
 };
-
-
-// type User = {
-//   id: string;
-//   name: string;
-// };
-
-// const users = await serverFetch<User[]>("/users");
-
-
-
-// await serverFetch("/posts", {
-//   method: "POST",
-//   body: JSON.stringify({ title: "Hello" }),
-// });

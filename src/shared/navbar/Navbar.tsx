@@ -171,7 +171,7 @@ const Navbar = () => {
                 </Link>
 
                 {/* <Link
-                  href="/partner-login"
+                  href="/login"
                   className="relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-[#D7A859] bg-transparent px-4 py-3 text-sm font-medium text-[#D7A859] group"
                   onClick={() => setIsOpen(false)}
                 >

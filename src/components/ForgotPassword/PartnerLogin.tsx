@@ -84,7 +84,7 @@ function ForgotPassword() {
 
               <div className="text-center mt-2">
                 <Link
-                  href="/partner-login"
+                  href="/login"
                   className="text-sm! text-yellow-400! font-medium! hover:underline!"
                 >
                   Back to Login

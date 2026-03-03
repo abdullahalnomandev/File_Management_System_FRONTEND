@@ -59,7 +59,7 @@ const Header = () => {
               Member Sign In
             </Link>
             <Link
-              href="/partner-login"
+              href="/login"
               className="hidden sm:flex items-center gap-2 rounded-md border border-amber-500 bg-transparent px-4 py-2 text-sm font-medium text-amber-500 transition-colors hover:bg-amber-500 hover:text-slate-900"
             >
               <Users className="w-4 h-4" />

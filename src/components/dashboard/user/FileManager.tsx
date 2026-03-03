@@ -256,7 +256,11 @@ export default function FileManager() {
                 overflow: "hidden",
                 transition: "all 0.3s ease",
               }}
-              bodyStyle={{ padding: 12 }}
+              styles={{
+                body: {
+                  padding: 12,
+                }
+              }}
             >
               {/* Header */}
               <div
