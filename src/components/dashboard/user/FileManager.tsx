@@ -183,7 +183,7 @@ export default function FileManager( { folders, files } :{ folders: IFolder[], f
       <Row gutter={[16, 16]}>
         {/* Folders */}
         {(folders ?? []).map((folder) => (
-          <Folder folder={folder} handleEdit={handleEdit} handleDeleteFolder={handleDeleteFolder} />
+          <Folder folder={folder} handleEdit={handleEdit} handleDeleteFolder={handleDeleteFolder} key={folder.id} />
         ))}
 
         {/* Files */}
